@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+spring:
+  application:
+    name: demo
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 100
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 3000
+    minEvictableIdleTimeMillis: 300000
+    validation-query: select 'X'
+    maxPoolPreparedStatementPerConnectionSize: 20
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  flyway:
+    locations: classpath:/db
+    enabled: true
