@@ -108,6 +108,7 @@ public class QuartzConfig implements ApplicationListener<ContextRefreshedEvent> 
          Reflections reflections = new Reflections(builder);
          Set<Method> methods = reflections.getMethodsAnnotatedWith(MyScheduleJob.class);
          try {
+             myScheduler.clear();
              for (Method method : methods){
                  MyScheduleJob myScheduleJob = AnnotationUtils.findAnnotation(method, MyScheduleJob.class);
                      if (null != myScheduleJob) {
@@ -120,7 +121,6 @@ public class QuartzConfig implements ApplicationListener<ContextRefreshedEvent> 
                          CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(clazz.getSimpleName()+"trigger", "triggerGroup")
                          .withSchedule(cronScheduleBuilder).build();
                          myScheduler.scheduleJob(jobDetail, trigger);
-
                      }
              }
              //            myScheduler.start();
